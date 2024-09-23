@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectResource\Pages;
-use App\Filament\Resources\ProjectResource\RelationManagers;
 use App\Models\Project;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProjectResource extends Resource
 {
@@ -29,6 +26,14 @@ class ProjectResource extends Resource
                 Forms\Components\Select::make('client_id')
                     ->relationship('client', 'name')
                     ->required(),
+                Forms\Components\Textarea::make('description')
+                    ->required(),
+                Forms\Components\Select::make('owner_id')
+                    ->relationship('user', 'name')
+                    ->required(),
+                Forms\Components\DateTimePicker::make('start_date')
+                    ->required(),
+                Forms\Components\DateTimePicker::make('end_date'),
             ]);
     }
 
